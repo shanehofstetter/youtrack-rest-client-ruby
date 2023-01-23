@@ -23,4 +23,6 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.required_ruby_version = Gem::Requirement.new(">= 2.1.0")
   gem.require_paths = ["lib"]
+
+  gem.add_dependency "rest-client"
 end
