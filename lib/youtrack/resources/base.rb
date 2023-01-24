@@ -7,8 +7,8 @@ module Youtrack
         @client = client
       end
 
-      def get_resource_with_fields(model_class, path)
-        client.get(path, params: { fields: model_class.to_fields_query })
+      def get_resource_with_fields(fields, path, options = {})
+        client.get(path, params: { fields: fields.map(&:to_query).join(",") }.merge(options.delete(:params) || {}))
       end
 
       def self.descendants
