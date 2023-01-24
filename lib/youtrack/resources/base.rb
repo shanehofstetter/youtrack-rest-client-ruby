@@ -8,7 +8,9 @@ module Youtrack
       end
 
       def get_resource_with_fields(fields, path, options = {})
-        client.get(path, params: { fields: fields.map(&:to_query).join(",") }.merge(options.delete(:params) || {}))
+        response = client.get(path, params: { fields: fields.map(&:to_query).join(",") }.merge(options.delete(:params) || {}))
+        json = JSON.parse(response.body)
+        model.from_json(json)
       end
 
       def self.descendants

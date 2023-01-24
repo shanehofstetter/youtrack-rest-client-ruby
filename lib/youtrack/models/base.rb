@@ -28,6 +28,10 @@ module Youtrack
         def to_s
           "Field name=#{name} extended=#{extended} model=#{model} type=#{type}"
         end
+
+        def attr_name
+          name.underscore
+        end
       end
 
       class << self
@@ -44,21 +48,53 @@ module Youtrack
         def field(name, extended: false)
           @fields ||= []
           @fields << Field.new(name: name, extended: extended)
-          attr_accessor name.underscore
+          register_field_as_attr(@fields.last)
         end
 
         def has_many(name, model, extended: true)
           @fields ||= []
           @fields << Field.new(name: name, extended: extended, model: model, type: :many)
-          attr_accessor name.underscore
+          register_field_as_attr(@fields.last)
         end
 
         def has_one(name, model, extended: true)
           @fields ||= []
           @fields << Field.new(name: name, extended: extended, model: model, type: :one)
-          attr_accessor name.underscore
+          register_field_as_attr(@fields.last)
         end
 
+        def register_field_as_attr(field)
+          attr_accessor field.attr_name
+        end
+
+        def from_json(json)
+          if json.is_a?(Array)
+            json.map { |item| from_json(item) }
+          else
+            self.new.tap do |instance|
+              json.each do |key, value|
+                field = fields.find { |f| f.name == key }
+                next unless field.present?
+                field_value = field.model.present? ? field.model.from_json(value) : value
+                instance.send(field.attr_name + "=", field_value)
+              end
+            end
+          end
+        end
+      end
+
+      def to_h
+        self.class.all_fields.map do |field|
+          value = send(field.attr_name)
+          if field.model.present?
+            if value.is_a?(Array)
+              value = value.map(&:to_h)
+            elsif value.respond_to?(:to_h)
+              value = value.to_h
+            end
+          end
+          [field.attr_name, value]
+        end.to_h
       end
 
     end

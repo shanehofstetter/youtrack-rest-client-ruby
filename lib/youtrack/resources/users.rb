@@ -8,15 +8,21 @@ module Youtrack
       )
 
       def current
-        get_resource_with_fields(Models::User.all_fields, PATHS.current)
+        get_resource_with_fields(model.all_fields, PATHS.current)
       end
 
       def all(options = {})
-        get_resource_with_fields(Models::User.minimal_fields, PATHS.users, params: options)
+        get_resource_with_fields(model.minimal_fields, PATHS.users, params: options)
       end
 
       def by_id(id)
-        get_resource_with_fields(Models::User.all_fields, PATHS.user % { user_id: id })
+        get_resource_with_fields(model.all_fields, PATHS.user % { user_id: id })
+      end
+
+      private
+
+      def model
+        Models::User
       end
 
     end
