@@ -14,8 +14,7 @@ module Youtrack
       end
 
       def post_resource_with_fields(fields, path, data)
-        payload = data.respond_to?(:to_json) ? data.to_json : data
-        response = client.post(path, payload, { params: query_params_for_fields(fields) })
+        response = client.post(path, prepare_payload(data), { params: query_params_for_fields(fields) })
         deserialize_response(response)
       end
 
@@ -31,6 +30,13 @@ module Youtrack
       def deserialize_response(response)
         json = JSON.parse(response.body)
         model.from_json(json)
+      end
+
+      def prepare_payload(data)
+        if data.respond_to?(:deep_transform_keys)
+          data = data.deep_transform_keys(&:camelize)
+        end
+        data.respond_to?(:to_json) ? data.to_json : data
       end
 
       def self.descendants

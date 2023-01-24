@@ -83,6 +83,13 @@ module Youtrack
         end
       end
 
+      def initialize(attrs = {})
+        attrs.each do |k, v|
+          next unless respond_to?(k.to_s + "=")
+          send(k.to_s + "=", v)
+        end
+      end
+
       def to_h
         self.class.all_fields.map do |field|
           value = send(field.attr_name)
