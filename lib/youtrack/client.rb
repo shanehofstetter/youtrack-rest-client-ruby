@@ -1,10 +1,6 @@
-require 'ostruct'
 require 'rest-client'
 require "active_support"
 require 'active_support/core_ext'
-
-Dir[File.dirname(__FILE__) + '/models/*.rb'].each { |file| require file }
-Dir[File.dirname(__FILE__) + '/resources/*.rb'].each { |file| require file }
 
 module Youtrack
   class Client

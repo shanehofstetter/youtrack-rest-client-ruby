@@ -15,8 +15,7 @@ module Youtrack
       field "jabberAccountName", extended: true
       field "ringId", extended: true
 
-      # associations
-      # has_many "tags", Tag
+      has_many "tags", Tag
     end
   end
 end
