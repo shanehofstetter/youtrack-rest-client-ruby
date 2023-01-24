@@ -103,6 +103,11 @@ module Youtrack
           [field.attr_name, value]
         end.to_h
       end
+      alias_method :to_hash, :to_h
+
+      def as_payload
+        to_h.compact.to_json
+      end
 
     end
   end

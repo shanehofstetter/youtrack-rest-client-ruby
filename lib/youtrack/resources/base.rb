@@ -38,7 +38,12 @@ module Youtrack
         if data.respond_to?(:deep_transform_keys)
           data = data.deep_transform_keys { |k| k.to_s.camelize(:lower) }
         end
-        data.respond_to?(:to_json) ? data.to_json : data
+        if data.respond_to?(:as_payload)
+          data = data.as_payload
+        elsif data.respond_to?(:to_json)
+          data = data.to_json
+        end
+        data
       end
 
       def self.descendants
