@@ -20,22 +20,44 @@ module Youtrack
       @issues ||= Resources::Issues.new(client: self)
     end
 
+    def projects
+      @projects ||= Resources::Projects.new(client: self)
+    end
+
     def get(path, options = {})
+      execute(:get, path, options)
+    end
+
+    def post(path, payload, options = {})
+      execute(:post, path, options.merge(payload: payload))
+    end
+
+    def delete(path, options = {})
+      execute(:delete, path, options)
+    end
+
+    def execute(method, path, options = {})
       RestClient::Request.execute(
-        method: :get,
+        method: method,
         url: request_url(path),
         headers: default_headers
                    .merge(options.delete(:headers) || {})
                    .merge(params: options.delete(:params) || {}),
         **options
       )
+    rescue RestClient::Exception => e
+      if e.http_body.present?
+        e.message = e.http_body
+      end
+      raise e
     end
 
     private
 
     def default_headers
       {
-        "Authorization" => "Bearer #{token}"
+        "Authorization" => "Bearer #{token}",
+        'Content-Type' => :json
       }
     end
 

@@ -17,6 +17,14 @@ module Youtrack
         [issues]
       end
 
+      def delete(id)
+        delete_resource(PATHS.issue % { id: id })
+      end
+
+      def create(issue)
+        post_resource_with_fields(model.all_fields, PATHS.issues, issue)
+      end
+
       private
 
       def model

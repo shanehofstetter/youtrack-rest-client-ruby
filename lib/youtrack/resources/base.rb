@@ -8,7 +8,27 @@ module Youtrack
       end
 
       def get_resource_with_fields(fields, path, options = {})
-        response = client.get(path, params: { fields: fields.map(&:to_query).join(",") }.merge(options.delete(:params) || {}))
+        query_params = query_params_for_fields(fields).merge(options.delete(:params) || {})
+        response = client.get(path, { params: query_params })
+        deserialize_response(response)
+      end
+
+      def post_resource_with_fields(fields, path, data)
+        payload = data.respond_to?(:to_json) ? data.to_json : data
+        response = client.post(path, payload, { params: query_params_for_fields(fields) })
+        deserialize_response(response)
+      end
+
+      def delete_resource(path)
+        client.delete(path)
+        true
+      end
+
+      def query_params_for_fields(fields)
+        { fields: fields.map(&:to_query).join(",") }
+      end
+
+      def deserialize_response(response)
         json = JSON.parse(response.body)
         model.from_json(json)
       end
