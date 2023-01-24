@@ -89,7 +89,7 @@ module Youtrack
           if field.model.present?
             if value.is_a?(Array)
               value = value.map(&:to_h)
-            elsif value.respond_to?(:to_h)
+            elsif value.present?
               value = value.to_h
             end
           end
