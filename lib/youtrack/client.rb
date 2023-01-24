@@ -16,6 +16,10 @@ module Youtrack
       @users ||= Resources::Users.new(client: self)
     end
 
+    def issues
+      @issues ||= Resources::Issues.new(client: self)
+    end
+
     def get(path, options = {})
       RestClient::Request.execute(
         method: :get,

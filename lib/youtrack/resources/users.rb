@@ -4,7 +4,7 @@ module Youtrack
       PATHS = OpenStruct.new(
         current: '/users/me',
         users: '/users',
-        user: '/users/%{user_id}'
+        user: '/users/%{id}'
       )
 
       def current
@@ -16,7 +16,7 @@ module Youtrack
       end
 
       def by_id(id)
-        get_resource_with_fields(model.all_fields, PATHS.user % { user_id: id })
+        get_resource_with_fields(model.all_fields, PATHS.user % { id: id })
       end
 
       private
