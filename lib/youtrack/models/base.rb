@@ -75,7 +75,7 @@ module Youtrack
               json.each do |key, value|
                 field = fields.find { |f| f.name == key }
                 next unless field.present?
-                field_value = field.model.present? ? field.model.from_json(value) : value
+                field_value = field.model.present? && value.present? ? field.model.from_json(value) : value
                 instance.send(field.attr_name + "=", field_value)
               end
             end

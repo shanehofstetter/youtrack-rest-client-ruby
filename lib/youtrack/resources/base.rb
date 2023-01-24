@@ -28,6 +28,7 @@ module Youtrack
       end
 
       def deserialize_response(response)
+        $stdout.puts response.body if ENV["DEBUG"]
         json = JSON.parse(response.body)
         model.from_json(json)
       end

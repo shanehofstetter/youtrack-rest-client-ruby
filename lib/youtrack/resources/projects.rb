@@ -3,10 +3,15 @@ module Youtrack
     class Projects < Base
       PATHS = OpenStruct.new(
         projects: '/admin/projects',
+        project: '/admin/projects/%{id}',
       )
 
       def all(options = {})
         get_resource_with_fields(model.minimal_fields, PATHS.projects, params: options)
+      end
+
+      def by_id(id)
+        get_resource_with_fields(model.all_fields, PATHS.project % { id: id })
       end
 
       private
