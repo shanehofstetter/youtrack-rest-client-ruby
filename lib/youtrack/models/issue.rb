@@ -3,11 +3,12 @@ module Youtrack
     class Issue < Base
 
       field "id"
+      field "idReadable"
       field "numberInProject"
       field "created"
       field "updated"
       field "resolved"
-      # has_one "project", extended: false
+      has_one "project", Project, extended: false
       field "summary"
       field "description"
 
