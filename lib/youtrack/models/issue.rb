@@ -16,7 +16,7 @@ module Youtrack
       has_one "updater", User, extended: true
       field "wikifiedDescription", extended: true
       field "usesMarkdown", extended: true
-      # has_many "fields", Field, extended: true
+      has_many "fields", IssueCustomField, extended: true
       field "isDraft", extended: true
       has_many "tags", Tag, extended: true
       # has_many "links", Link, extended: true
