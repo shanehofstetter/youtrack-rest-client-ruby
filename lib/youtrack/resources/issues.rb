@@ -11,8 +11,8 @@ module Youtrack
         get_resource_with_fields(model.all_fields, PATHS.issue % { id: id })
       end
 
-      def search(query, options = {})
-        issues = get_resource_with_fields(model.minimal_fields, PATHS.issues, { params: { query: query }.merge(options) })
+      def search(query, params = {})
+        issues = get_resource_with_fields(model.minimal_fields, PATHS.issues, { params: { query: query }.merge(params) })
         return issues if issues.is_a?(Array)
         [issues]
       end

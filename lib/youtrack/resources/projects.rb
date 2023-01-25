@@ -6,8 +6,8 @@ module Youtrack
         project: '/admin/projects/%{id}',
       )
 
-      def all(options = {})
-        get_resource_with_fields(model.minimal_fields, PATHS.projects, params: options)
+      def all(params = {})
+        get_resource_with_fields(model.minimal_fields, PATHS.projects, params: params)
       end
 
       def by_id(id)
