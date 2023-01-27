@@ -25,7 +25,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = Gem::Requirement.new(">= 2.1.0")
   gem.require_paths = ["lib"]
 
-  gem.add_dependency "rest-client"
-  gem.add_dependency "activesupport"
-  gem.add_dependency "zeitwerk"
+  gem.add_runtime_dependency "rest-client", '~> 2.0'
+  gem.add_runtime_dependency "activesupport", '> 5.0.0'
+  gem.add_runtime_dependency "zeitwerk", '~> 2.6'
 end
