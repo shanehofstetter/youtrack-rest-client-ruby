@@ -8,12 +8,13 @@ Gem::Specification.new do |gem|
   gem.version       = Youtrack::VERSION
   gem.authors       = ["Shane Hofstetter"]
   gem.email         = ["shane.hofstetter@gmail.com"]
-  gem.description   = %q{youtrack REST API client}
+  gem.description   = %q{REST API client for youtrack from jetbrains}
   gem.summary       = %q{youtrack REST API client}
   gem.homepage      = "https://github.com/shanehofstetter/youtrack-rest-client-ruby"
   gem.metadata["homepage_uri"] = gem.homepage
   gem.metadata["source_code_uri"] = "https://github.com/shanehofstetter/youtrack-rest-client-ruby"
   gem.metadata["changelog_uri"] = "https://github.com/shanehofstetter/youtrack-rest-client-ruby/blob/main/CHANGELOG.md"
+  gem.metadata["bug_tracker_uri"] = "https://github.com/shanehofstetter/youtrack-rest-client-ruby/issues"
   gem.license       = "MIT"
 
   gem.files         = `git ls-files -z`.split("\x0").reject do |f|
