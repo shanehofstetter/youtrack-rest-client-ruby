@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'youtrack/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "youtrack-client"
+  gem.name          = "youtrack_client"
   gem.version       = Youtrack::VERSION
   gem.authors       = ["Shane Hofstetter"]
   gem.email         = ["shane.hofstetter@gmail.com"]
