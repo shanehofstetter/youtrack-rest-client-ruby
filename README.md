@@ -4,6 +4,9 @@
 
 Ruby client for the [Youtrack REST API](https://www.jetbrains.com/help/youtrack/standalone/youtrack-rest-api-reference.html)
 
+[![🛡 Specs](https://github.com/shanehofstetter/youtrack-rest-client-ruby/actions/workflows/specs.yml/badge.svg)](https://github.com/shanehofstetter/youtrack-rest-client-ruby/actions/workflows/specs.yml)
+[![Gem Version](https://badge.fury.io/rb/youtrack_client.svg)](https://badge.fury.io/rb/youtrack_client)
+
 ## Usage
 
 ## Installation
