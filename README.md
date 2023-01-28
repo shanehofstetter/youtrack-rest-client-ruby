@@ -94,7 +94,7 @@ youtrack.issues.create({
 # you can also pass a model instance
 youtrack.issues.create(Youtrack::Models::Issue.new(summary: "demo issue",
                                                    description: "demo issue description",
-                                                   project: client.projects.by_id("0-0")))
+                                                   project: youtrack.projects.by_id("0-0")))
 
 
 ```
@@ -103,7 +103,7 @@ youtrack.issues.create(Youtrack::Models::Issue.new(summary: "demo issue",
 
 ```ruby
 # execute command for issue(s)
-youtrack.issues.command("State Open", client.issues.search("DEMO-12"))
+youtrack.issues.command("State Open", youtrack.issues.search("DEMO-12"))
 # pass the ids directly
 youtrack.issues.command("State Open", %w[T1-1 T1-2 T1-3])
 ```
