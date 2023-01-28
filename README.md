@@ -8,7 +8,11 @@ Ruby client for the [Youtrack REST API](https://www.jetbrains.com/help/youtrack/
 
 ## Installation
 
-TBD
+Using bundler:
+
+```bash
+bundle add youtrack_client
+```
 
 ### Authentication
 
