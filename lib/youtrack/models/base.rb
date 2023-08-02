@@ -70,7 +70,7 @@ module Youtrack
         def from_json(json)
           if json.is_a?(Array)
             json.map { |item| from_json(item) }
-          else
+          elsif json.respond_to?(:each)
             self.new.tap do |instance|
               json.each do |key, value|
                 field = fields.find { |f| f.name == key }
@@ -79,6 +79,9 @@ module Youtrack
                 instance.send(field.attr_name + "=", field_value)
               end
             end
+          else
+            # unknown type, could be a string/int value for an IssueCustomField
+            json
           end
         end
       end
@@ -103,6 +106,7 @@ module Youtrack
           [field.attr_name, value]
         end.to_h
       end
+
       alias_method :to_hash, :to_h
 
       def as_payload
